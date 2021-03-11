@@ -1,0 +1,50 @@
+CREATE DATABASE `blog` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) NOT NULL,
+  `brief` varchar(1023) NOT NULL,
+  `content` longtext NOT NULL,
+  `create_date` date NOT NULL,
+  `writer_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `wrter_id_idx` (`writer_id`),
+  KEY `category_id_idx` (`category_id`),
+  CONSTRAINT `writer_id` FOREIGN KEY (`writer_id`) REFERENCES `writer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `title` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tag` (
+  `id` int(11) NOT NULL,
+  `title` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tag_article` (
+  `id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  `article_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tag_id_idx` (`tag_id`),
+  KEY `article_id_idx` (`article_id`),
+  CONSTRAINT `tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `writer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `age` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
