@@ -1,0 +1,35 @@
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-start">
+        <a class="navbar-brand text-white">Navbar</a>
+        <ul class="nav nav-pills" style="padding-left: 10px">
+            <li class="nav-item">
+                <a class="nav-link
+                <% if (active === "home"){%>
+                    active
+                <%}%>
+                " aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link
+                <% if (active === "company"){%>
+                    active
+                <%}%>
+                " href="/company">Company</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Extra
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/extra/1">1</a></li>
+                    <li><a class="dropdown-item" href="/extra/2">2</a></li>
+                    <li><a class="dropdown-item" href="/extra/3">3</a></li>
+                    <li><a class="dropdown-item" href="/extra/4">4</a></li>
+                    <li><a class="dropdown-item" href="/extra/5">5</a></li>
+                </ul>
+            </li>
+        </ul>
+        </div>
+    </div>
+</nav>

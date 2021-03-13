@@ -8,57 +8,37 @@ const CompanySchema = new Schema({
         trim: true,
         minlength: 2,
         maxlength: 30,
-        unique: true
     },
     state:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     city:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     phoneNumber:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     registrationNumber:{
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        unique: true,
     },
     registrationDate: {
-        type: Date
+        type: Date,
+        required: true
     },
     CreatedAt: {
         type: Date,
         default: Date.now
     }
 });
-
-//
-// CompanySchema.pre('save', function(next)  {
-//     console.log("this", this);
-//
-//     return next();
-//
-// });
-//
-// CompanySchema.post('save', function(doc, next) {
-//     console.log("doc", doc);
-//
-//
-//     return next()
-//
-// });
-
-
-// CompanySchema.pre('deleteOne', {document:true}, function(next) {
-//     console.log(this._id);
-//     Product.deleteMany({company: this._id}, err => {
-//         if (err) return next(err);
-//         next();
-//     })
-// })
 
 module.exports = mongoose.model('Company', CompanySchema);
 

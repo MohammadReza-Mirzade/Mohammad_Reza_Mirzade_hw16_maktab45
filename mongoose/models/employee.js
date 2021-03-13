@@ -18,9 +18,11 @@ const EmployeeSchema = new Schema({
     },
     nationalNumber:{
         required: true,
-        type: String
+        type: String,
+        trim: true,
+        unique: true,
     },
-    beManager:{
+    beBoss:{
         type: Boolean,
         required: true
     },
