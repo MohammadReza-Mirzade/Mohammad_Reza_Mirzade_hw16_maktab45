@@ -1,0 +1,25 @@
+select w.*, count(*) as number_of_article from writer as w join article as a on w.id = a.writer_id group by w.last_name, w.first_name;
+select a.id, a.title, a.brief, a.content, a.create_date, w.first_name, w.last_name from writer as w JOIN article as a on w.id = a.writer_id where w.first_name = 'Akeem' and w.last_name = 'Carter';
+select a.id, a.title, a.brief, a.content, a.create_date, c.title as category, w.first_name, w.last_name from writer as w join article as a on w.id = a.writer_id join category as c on a.category_id = c.id where w.first_name = 'Akeem' and w.last_name = 'Carter' and c.title = 'consequat';
+select t.title as tag, count(*) as Number_Of_Article from tag_article as ta join tag as t on ta.tag_id = t.id join article as a on a.id = ta.article_id group by t.title;
+select c.title as category from category as c left join article as a on c.id = a.category_id where a.category_id is null;
+_________________________________________________
+mysqldump -u username -p database_name > data-dump.sql
+_________________________________________________
+mysql> CREATE DATABASE new_database;
+mysql -u username -p new_database < data-dump.sql
+_________________________________________________
+"server > export data"
+"server > import data" OR "file > run sql script" OR "file > open sql script" then run the script.
+_________________________________________________
+self join : مثل ارتباط یک تیبل با یک تیبل دیگر است ولی با این تفاوت که یک تیبل با خودش ارتباط دارد.
+مثال:
+(1:1): ارتباط هم گروهی های دو نفره در تیبل دانش آموزان
+(1:n): ارتباط سرپرست هر کارمند با کارمند در تیبل کارمندان یک شرکت.
+(n:n): ارتباط هم شهری بودن افراد اعضای یک تیبل
+_________________________________________________
+select a.name as person1, b.name as person2, a.group_name from groups a, groups b where a.id <> b.id and a.group = b.group;
+_________________________________________________
+select a.name as employee, b.name as boss from employees a, employees b where a.id <> b.id and a.bossId = b.id;
+_________________________________________________
+select a.name as person1, b.name as person2, a.city from table a, table b where a.id <> b.id and a.city = b.city;
