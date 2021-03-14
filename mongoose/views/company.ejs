@@ -14,6 +14,8 @@
 <div  class="d-flex justify-content-center flex-wrap">
 <div class="w-100 d-flex justify-content-around">
     <div class="2-75">
+        <div class="card">
+            <div class="card-body">
 <form action="/company/create" method="post">
     <div class="mb-3">
         <label for="name" class="form-label">name</label>
@@ -41,9 +43,12 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+            </div>
+        </div>
     </div>
 </div>
 <br>
+    <hr>
 <br>
 <%companies.forEach(function (value){%>
     <div class="card" style="width: 18rem;">

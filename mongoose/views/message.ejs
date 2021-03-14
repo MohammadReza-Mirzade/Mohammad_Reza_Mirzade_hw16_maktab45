@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>bad request</title>
+    <title>Message</title>
     <link rel='stylesheet' href='/style/style.css' />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </head>
 <body>
 <%- include("./partials/header", {active: 0}) %>
+<br><br><br><br>
 <div  class="d-flex justify-content-center flex-wrap">
-<br><br><br><br>
-<h1>Bad request. :(</h1>
-<br><br><br><br>
+    <div class="card">
+        <div class="card-body">
+<h1><%= message %>></h1>
+        </div>
+    </div>
 </div>
+<br><br><br><br>
 <%- include("./partials/footer") %>
 </body>
 </html>

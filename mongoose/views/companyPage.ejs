@@ -24,7 +24,7 @@
         <h2><%= registrationDate%></h2>
         <h3><%= company._id%></h3>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateCompany">change company info</button>
-        <a href="/company/delete/<%= company._id %>">delete company</a>
+        <a class="btn btn-danger" href="/company/delete/<%= company._id %>">delete company</a>
     </div>
 </div>
     </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="registrationNumber" class="form-label">registrationNumber</label>
-                        <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" value="<%= company.registrationNumber%>">
+                        <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" value="<%= company.registrationNumber%>" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="registrationDate" class="form-label">registrationDate</label>
@@ -77,18 +77,20 @@
 
     <div class="w-100 d-flex justify-content-around">
         <div class="2-75">
+            <div class="card">
+                <div class="card-body">
 <form action="/employee/create" method="post">
     <div class="mb-3">
         <label for="company" class="form-label">company</label>
         <input type="text" class="form-control" id="company" name="company" value="<%= company._id%>" readonly>
     </div>
     <div class="mb-3">
-        <label for="lastName" class="form-label">lastName</label>
-        <input type="text" class="form-control" id="lastName" name="lastName">
-    </div>
-    <div class="mb-3">
         <label for="firstName" class="form-label">firstName</label>
         <input type="text" class="form-control" id="firstName" name="firstName">
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">lastName</label>
+        <input type="text" class="form-control" id="lastName" name="lastName">
     </div>
     <div class="mb-3">
         <label for="nationalNumber" class="form-label">nationalNumber</label>
@@ -112,9 +114,11 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+                </div>
+            </div>
         </div>
     </div>
-
+<hr>
 <%employees.forEach(function (value){%>
     <div class="card" style="width: 18rem;">
         <div class="card-body">

@@ -6,16 +6,16 @@ const Employee = require('../models/employee');
 
 Router.get('/', (req, res) => {
     Company.find({}, (err, companies) => {
-        if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
+        if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
         res.render('company', {companies});
     });
 });
 
 Router.get('/:id', (req, res) => {
     Company.findById(req.params.id, (err, company) => {
-        if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
+        if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
         Employee.find({company: req.params.id}, (err, employees)=>{
-            if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
+            if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
 
             let d = new Date(company.registrationDate), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
             if (month.length < 2)
@@ -30,12 +30,12 @@ Router.get('/:id', (req, res) => {
 
 Router.post('/create', (req, res) => {
     if (!req.body.name && !req.body.state && !req.body.city && !req.body.phoneNumber && !req.body.registrationDate) {
-        return res.status(400).json({msg: "Bad Request :)"})
+        return res.status(400).render('message', {message: "Bad Request :)"})
     };
 
     Company.findOne({registrationNumber: req.body.registrationNumber.trim()}, (err, company) => {
-        if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
-        if (company) return res.status(406).json({msg: "Exist Company Name :("})
+        if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
+        if (company) return res.status(406).render('message', {message: "Exist Company Name :("})
     
         const newCompany = new Company({
             name: req.body.name,
@@ -47,32 +47,32 @@ Router.post('/create', (req, res) => {
         });
     
         newCompany.save((err, company) => {
-            if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
-            res.redirect("/success");
+            if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
+            res.render('message', {message: 'The operation was successful.'});
         });
     });
 });
 
 Router.post('/update/:id', (req, res) => {
     if (!req.body.name && !req.body.state && !req.body.city && !req.body.phoneNumber && !req.body.registrationDate) {
-        return res.status(400).json({msg: "Bad Request :)"})
+        return res.status(400).render('message', {message: "Bad Request :)"})
     };
     Company.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, (err, company) => {
-        if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
-        res.redirect("/success");
+        if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
+        res.render('message', {message: 'The operation was successful.'});
     });
 });
 
 Router.get('/delete/:id', (req, res) => {
     Company.findOne({_id: req.params.id}, (err, company) => {
-        if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
-        if (!company) return res.status(404).json({msg: "Not Found!"})
+        if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
+        if (!company) return res.status(404).render('message', {message: "Not Found!"})
         company.deleteOne((err, company) => {
-            if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
+            if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
 
             Employee.deleteMany({company: company._id}, err => {
-                if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
-                res.redirect("/success");
+                if (err) return res.status(500).json({msg: "Server Error :)", err: console.log(err.message)});
+                res.render('message', {message: 'The operation was successful.'});
             });
         });
     });

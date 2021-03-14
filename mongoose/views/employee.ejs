@@ -15,16 +15,16 @@
 <div class="w-100 d-flex justify-content-center">
 <div class="card">
     <div class="card-body">
-        <h1>Last Name: <%= employee.lastName%></h1>
         <h2>First Name: <%= employee.firstName%></h2>
+        <h1>Last Name: <%= employee.lastName%></h1>
         <h2>National Number: <%= employee.nationalNumber%></h2>
         <h2>Is He Boss: <%= employee.beBoss%></h2>
-        <h2>Gender: <%= employee.gender %></h2>
+        <h2>Gender: <%= employee.gender?'man':'woman' %></h2>
         <h2>Birthday: <%= birthday%></h2>
         <h2>Id :<%= employee._id %></h2>
-        <h2>Company Info: <br> <%= employee.company%></h2>
+        <h2>Company name: <br> <%= employee.company.name%></h2>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-employee">change employee info</button>
-        <a  href="/employee/delete/<%= employee._id %>">delete employee</a>
+        <a class="btn btn-danger"  href="/employee/delete/<%= employee._id %>">delete employee</a>
     </div>
 </div>
 </div>
@@ -38,10 +38,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                form action="/employee/update/<%= employee._id %>" method="post">
+                <form action="/employee/update/<%= employee._id %>" method="post">
                 <div class="mb-3">
                     <label for="company" class="form-label">company</label>
-                    <input type="text" class="form-control" id="company" name="company" value="<%= employee.company._id%>">
+                    <input type="text" class="form-control" id="company" name="company" value="<%= employee.company._id%>" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="lastName" class="form-label">lastName</label>
@@ -53,18 +53,18 @@
                 </div>
                 <div class="mb-3" >
                     <label for="nationalNumber" class="form-label">nationalNumber</label>
-                    <input type="number" class="form-control" id="nationalNumber" name="nationalNumber"  value="<%= employee.nationalNumber %>">
+                    <input type="number" class="form-control" id="nationalNumber" name="nationalNumber"  value="<%= employee.nationalNumber %>" readonly>
                 </div>
                 <div class="form-check form-check">
-                    <input class="form-check-input" type="checkbox" name="beBoss" id="beBoss" value="yes" <%if(employee.beBoss === 'yes'){%>checked<%}%> >
+                    <input class="form-check-input" type="checkbox" name="beBoss" id="beBoss" value="yes" <%if(employee.beBoss === true){%>checked<%}%> >
                     <label class="form-check-label" for="beBoss">be boss</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="gender1" value="man" <%if(employee.gender === 'man'){%>checked<%}%> >
+                    <input class="form-check-input" type="radio" name="gender" id="gender1" value="man" <%if(employee.gender === true){%>checked<%}%> >
                     <label class="form-check-label" for="inlineRadio1">man</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="gender2" value="woman" <%if(employee.gender === 'woman'){%>checked<%}%> >
+                    <input class="form-check-input" type="radio" name="gender" id="gender2" value="woman" <%if(employee.gender === false){%>checked<%}%> >
                     <label class="form-check-label" for="inlineRadio2">woman</label>
                 </div>
                 <div class="mb-3">
