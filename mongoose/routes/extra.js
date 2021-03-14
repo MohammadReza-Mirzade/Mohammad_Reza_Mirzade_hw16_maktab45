@@ -17,7 +17,7 @@ Router.get('/3', function (req, res){
     date.setFullYear(date.getFullYear()-20);
     let data1 = date;
     date.setFullYear(date.getFullYear()-10);
-    Employee.find({birthday: {$not: {$and : [{$gt: date},{$lt: data1}]}}}, {'_id':0}, (err, companies) => {
+    Employee.find({birthday: {$not: {$gt: date,$lt: data1}}}, {'_id':0}, (err, companies) => {
         if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
         res.send(companies);
     });

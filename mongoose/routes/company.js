@@ -33,9 +33,9 @@ Router.post('/create', (req, res) => {
         return res.status(400).json({msg: "Bad Request :)"})
     };
 
-    Company.findOne({registrationNumber: req.body.registrationNumber.trim()}, (err, Company) => {
+    Company.findOne({registrationNumber: req.body.registrationNumber.trim()}, (err, company) => {
         if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
-        if (Company) return res.status(406).json({msg: "Exist Company Name :("})
+        if (company) return res.status(406).json({msg: "Exist Company Name :("})
     
         const newCompany = new Company({
             name: req.body.name,
@@ -63,7 +63,7 @@ Router.post('/update/:id', (req, res) => {
     });
 });
 
-Router.post('/delete/:id', (req, res) => {
+Router.get('/delete/:id', (req, res) => {
     Company.findOne({_id: req.params.id}, (err, company) => {
         if (err) return res.status(500).json({msg: "Server Error :)", err: err.message});
         if (!company) return res.status(404).json({msg: "Not Found!"})
